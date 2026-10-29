@@ -11,8 +11,9 @@ import java.io.File
 class MetricsLog(dir: File) {
     val file = File(dir, "metrics.jsonl")
 
-    fun append(result: LevelResult, decision: DecisionResult, nextDifficulty: Float) {
+    fun append(result: LevelResult, decision: DecisionResult, nextDifficulty: Float, simulated: Boolean = false) {
         val line = result.toJson()
+            .put("simulated", simulated)
             .put("time", System.currentTimeMillis())
             .put("decision", decision.decision.name)
             .put("provider", decision.source)

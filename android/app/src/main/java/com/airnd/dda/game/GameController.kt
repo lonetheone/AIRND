@@ -8,6 +8,7 @@ import androidx.compose.runtime.setValue
 import com.airnd.dda.dda.DecisionResult
 import com.airnd.dda.dda.Difficulty
 import com.airnd.dda.dda.DifficultyProvider
+import com.airnd.dda.dda.PlayerSimulator
 import com.airnd.dda.metrics.LevelResult
 import com.airnd.dda.metrics.MetricsLog
 import kotlinx.coroutines.CoroutineScope
@@ -116,6 +117,30 @@ class GameController(
             withContext(Dispatchers.IO) { log.append(result, decision, nextDifficulty) }
             lastDecision = decision
             phase = Phase.ENDED
+        }
+    }
+
+    /**
+     * Debug: lets a synthetic player of [trueSkill] play [attempts] attempts
+     * through the current provider, so the difficulty/skill chart can be
+     * checked without playing by hand. Logged with "simulated": true.
+     */
+    fun simulate(trueSkill: Float, attempts: Int) {
+        if (phase != Phase.PLAYING) return
+        phase = Phase.DECIDING
+        scope.launch {
+            val player = PlayerSimulator(trueSkill, Random(history.size + 1))
+            repeat(attempts) {
+                val result = player.play(level, attempt, difficulty)
+                history += result
+                val decision = withContext(Dispatchers.Default) { provider.decide(history.takeLast(HISTORY_WINDOW)) }
+                val next = Difficulty.apply(difficulty, decision.decision)
+                withContext(Dispatchers.IO) { log.append(result, decision, next, simulated = true) }
+                lastDecision = decision
+                if (result.won) { level++; attempt = 1 } else attempt++
+                difficulty = next
+            }
+            startLevel()
         }
     }
 

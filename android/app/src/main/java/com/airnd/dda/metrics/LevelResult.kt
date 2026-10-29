@@ -17,6 +17,8 @@ data class LevelResult(
     val hintsUsed: Int,
     /** The player restarted or left before the level ended. */
     val quit: Boolean,
+    /** Known only for simulated players: lets the chart check the skill estimate. */
+    val trueSkill: Float? = null,
 ) {
     fun toJson(): JSONObject = JSONObject()
         .put("level", level).put("attempt", attempt).put("difficulty", difficulty.toDouble())
@@ -24,4 +26,5 @@ data class LevelResult(
         .put("goal_progress", goalProgress.toDouble())
         .put("avg_seconds_per_move", avgSecondsPerMove.toDouble())
         .put("invalid_swaps", invalidSwaps).put("hints_used", hintsUsed).put("quit", quit)
+        .apply { trueSkill?.let { put("true_skill", it.toDouble()) } }
 }

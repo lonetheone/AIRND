@@ -54,19 +54,35 @@ private val TILE_COLORS = listOf(
 @Composable
 fun GameScreen(game: GameController, logPath: String) {
     var showDebug by remember { mutableStateOf(true) }
+    var showGraph by remember { mutableStateOf(false) }
     Column(
         Modifier.fillMaxSize().background(Color(0xFF15171C)).systemBarsPadding().padding(12.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Hud(game)
-        BoardView(game, Modifier.fillMaxWidth().aspectRatio(1f))
+        if (showGraph) {
+            // Graph mode takes the board's place and the debug panel's space.
+            Column(Modifier.fillMaxWidth().weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                FlowChart(game.history.toList(), Modifier.fillMaxWidth(), chartHeight = 260.dp)
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    for ((label, skill) in listOf("Sim weak" to 0.2f, "Sim average" to 0.5f, "Sim expert" to 0.85f)) {
+                        OutlinedButton(onClick = { game.simulate(skill, 12) }, enabled = game.phase == Phase.PLAYING) {
+                            Text(label, fontSize = 11.sp)
+                        }
+                    }
+                }
+            }
+        } else {
+            BoardView(game, Modifier.fillMaxWidth().aspectRatio(1f))
+        }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            OutlinedButton(onClick = game::showHint) { Text("Hint") }
-            OutlinedButton(onClick = game::restart) { Text("Restart") }
+            OutlinedButton(onClick = game::showHint, enabled = !showGraph) { Text("Hint") }
+            OutlinedButton(onClick = game::restart, enabled = !showGraph) { Text("Restart") }
             Spacer(Modifier.weight(1f))
+            TextButton(onClick = { showGraph = !showGraph }) { Text(if (showGraph) "Board" else "Graph") }
             TextButton(onClick = { showDebug = !showDebug }) { Text(if (showDebug) "Hide debug" else "Debug") }
         }
-        if (showDebug) DebugPanel(game, logPath, Modifier.weight(1f))
+        if (showDebug && !showGraph) DebugPanel(game, logPath, Modifier.weight(1f))
     }
     if (game.phase != Phase.PLAYING) LevelEndDialog(game)
 }
