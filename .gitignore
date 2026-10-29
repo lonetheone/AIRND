@@ -17,12 +17,15 @@ cmake-build-*/
 # Model weights (tracked via models/manifest.json, not Git)
 models/hf/
 models/gguf/
+models/finetuned/
+training/data/
 models/**/*.gguf
 models/**/*.bin
 models/**/*.safetensors
 
 # Python
 .venv/
+.venv-train/
 __pycache__/
 
 # Benchmark raw output

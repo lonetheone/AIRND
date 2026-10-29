@@ -32,11 +32,17 @@ $pip = $LASTEXITCODE
 "pip exit: $pip"
 if ($pip -ne 0) { throw "pip install failed" }
 
-# Download the exact revision.
-$hfDir = Join-Path $repo "models\hf\$Name"
-$code = "import sys; from huggingface_hub import snapshot_download; snapshot_download(repo_id=sys.argv[1], revision=sys.argv[2], local_dir=sys.argv[3])"
-& $py -c $code $model.source.repo $model.source.revision $hfDir
-if ($LASTEXITCODE -ne 0) { throw "download failed" }
+# A local checkpoint (our fine-tunes) is converted in place; otherwise
+# download the exact revision.
+if ($model.source.local) {
+    $hfDir = Join-Path $repo $model.source.local
+    if (-not (Test-Path (Join-Path $hfDir "config.json"))) { throw "missing checkpoint $hfDir; run training first" }
+} else {
+    $hfDir = Join-Path $repo "models\hf\$Name"
+    $code = "import sys; from huggingface_hub import snapshot_download; snapshot_download(repo_id=sys.argv[1], revision=sys.argv[2], local_dir=sys.argv[3])"
+    & $py -c $code $model.source.repo $model.source.revision $hfDir
+    if ($LASTEXITCODE -ne 0) { throw "download failed" }
+}
 
 # Convert to f16 GGUF, then quantize the rest from it.
 $ggufDir = Join-Path $repo "models\gguf"

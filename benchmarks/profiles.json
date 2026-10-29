@@ -6,6 +6,9 @@
     "qwen3-0.6b-q4":   { "gguf": "models/gguf/qwen3-0.6b-q4_k_m.gguf", "family": "qwen3-nothink", "ctx": 512, "threads": 4 },
     "qwen3-0.6b-q8":   { "gguf": "models/gguf/qwen3-0.6b-q8_0.gguf", "family": "qwen3-nothink", "ctx": 512, "threads": 4 },
     "smollm2-135m-f16": { "gguf": "models/gguf/smollm2-135m-instruct-f16.gguf", "family": "chatml", "ctx": 512, "threads": 4 },
-    "qwen3-0.6b-f16":  { "gguf": "models/gguf/qwen3-0.6b-f16.gguf", "family": "qwen3-nothink", "ctx": 512, "threads": 4 }
+    "qwen3-0.6b-f16":  { "gguf": "models/gguf/qwen3-0.6b-f16.gguf", "family": "qwen3-nothink", "ctx": 512, "threads": 4 },
+    "decide-v1-q4":    { "gguf": "models/gguf/smollm2-135m-decide-v1-q4_k_m.gguf", "family": "chatml", "ctx": 512, "threads": 4 },
+    "decide-v1-q8":    { "gguf": "models/gguf/smollm2-135m-decide-v1-q8_0.gguf", "family": "chatml", "ctx": 512, "threads": 4 },
+    "decide-v1-f16":   { "gguf": "models/gguf/smollm2-135m-decide-v1-f16.gguf", "family": "chatml", "ctx": 512, "threads": 4 }
   }
 }

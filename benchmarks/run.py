@@ -26,18 +26,15 @@ from pathlib import Path
 
 import psutil
 
+from decision_prompt import system_text, user_text
+
 REPO = Path(__file__).resolve().parent.parent
 SERVER = REPO / "build" / "llama" / "bin" / "llama-server.exe"
 PORT = 8089
 
-SYSTEM = ("You control a character in a survival game. Choose the best action for "
-          "the situation. Reply with exactly one word: {options}.")
-
-
 def build_prompt(family, situation, options):
-    system = SYSTEM.format(options=", ".join(options[:-1]) + ", or " + options[-1])
-    prompt = (f"<|im_start|>system\n{system}<|im_end|>\n"
-              f"<|im_start|>user\n{situation} Which action?<|im_end|>\n"
+    prompt = (f"<|im_start|>system\n{system_text(options)}<|im_end|>\n"
+              f"<|im_start|>user\n{user_text(situation)}<|im_end|>\n"
               f"<|im_start|>assistant\n")
     if family == "qwen3-nothink":
         prompt += "<think>\n\n</think>\n\n"  # Qwen3's documented empty-thinking form
