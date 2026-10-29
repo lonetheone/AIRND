@@ -1,0 +1,23 @@
+# Build output
+build/
+out/
+cmake-build-*/
+*.obj
+*.pdb
+*.ilk
+*.exe
+*.dll
+*.lib
+
+# IDE
+.vs/
+.vscode/
+.idea/
+
+# Model weights (tracked via models/manifest, not Git)
+models/**/*.gguf
+models/**/*.bin
+models/**/*.safetensors
+
+# Benchmark raw output
+benchmarks/results/raw/
