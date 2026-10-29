@@ -1,0 +1,10 @@
+prefix=C:/Program Files (x86)/airnd_llm
+exec_prefix=C:/Program Files (x86)/airnd_llm
+libdir=C:/Program Files (x86)/airnd_llm/lib
+includedir=C:/Program Files (x86)/airnd_llm/include
+
+Name: llama
+Description: Port of Facebook's LLaMA model in C/C++
+Version: 0.8.0-dev
+Libs: -L${libdir} -lggml -lggml-base -lllama
+Cflags: -I${includedir}

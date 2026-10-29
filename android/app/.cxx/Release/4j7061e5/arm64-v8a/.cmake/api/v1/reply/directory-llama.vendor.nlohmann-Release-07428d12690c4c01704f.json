@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "llama/vendor/nlohmann",
+		"source" : "D:/AIRND/third_party/llama.cpp/vendor/nlohmann"
+	}
+}

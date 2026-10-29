@@ -1,0 +1,83 @@
+{
+  "buildFiles": [
+    "D:\\AIRND\\android\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "D:\\AIRND\\third_party\\llama.cpp\\CMakeLists.txt",
+    "D:\\AIRND\\third_party\\llama.cpp\\ggml\\CMakeLists.txt",
+    "D:\\AIRND\\third_party\\llama.cpp\\ggml\\src\\CMakeLists.txt",
+    "D:\\AIRND\\third_party\\llama.cpp\\ggml\\src\\ggml-cpu\\CMakeLists.txt",
+    "D:\\AIRND\\third_party\\llama.cpp\\src\\CMakeLists.txt",
+    "D:\\AIRND\\third_party\\llama.cpp\\vendor\\CMakeLists.txt",
+    "D:\\AIRND\\third_party\\llama.cpp\\vendor\\hash\\CMakeLists.txt",
+    "D:\\AIRND\\third_party\\llama.cpp\\vendor\\miniaudio\\CMakeLists.txt",
+    "D:\\AIRND\\third_party\\llama.cpp\\vendor\\nlohmann\\CMakeLists.txt",
+    "D:\\AIRND\\third_party\\llama.cpp\\vendor\\sheredom\\CMakeLists.txt",
+    "D:\\AIRND\\third_party\\llama.cpp\\vendor\\stb\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\Soe\\AppData\\Local\\Android\\Sdk\\cmake\\3.31.6\\bin\\ninja.exe",
+      "-C",
+      "D:\\AIRND\\android\\app\\.cxx\\Release\\4j7061e5\\arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\Soe\\AppData\\Local\\Android\\Sdk\\cmake\\3.31.6\\bin\\ninja.exe",
+    "-C",
+    "D:\\AIRND\\android\\app\\.cxx\\Release\\4j7061e5\\arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "airnd_llm::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "airnd_llm",
+      "output": "D:\\AIRND\\android\\app\\build\\intermediates\\cxx\\Release\\4j7061e5\\obj\\arm64-v8a\\libairnd_llm.so",
+      "runtimeFiles": []
+    },
+    "ggml::@96d03cab6fb05857ea28": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "ggml",
+      "output": "D:\\AIRND\\android\\app\\.cxx\\Release\\4j7061e5\\arm64-v8a\\llama\\ggml\\src\\libggml.a"
+    },
+    "ggml-base::@96d03cab6fb05857ea28": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "ggml-base",
+      "output": "D:\\AIRND\\android\\app\\.cxx\\Release\\4j7061e5\\arm64-v8a\\llama\\ggml\\src\\libggml-base.a"
+    },
+    "ggml-cpu::@96d03cab6fb05857ea28": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "ggml-cpu",
+      "output": "D:\\AIRND\\android\\app\\.cxx\\Release\\4j7061e5\\arm64-v8a\\llama\\ggml\\src\\libggml-cpu.a"
+    },
+    "llama::@e48e26b3b0ed6be1ceb6": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "llama",
+      "output": "D:\\AIRND\\android\\app\\.cxx\\Release\\4j7061e5\\arm64-v8a\\llama\\src\\libllama.a"
+    },
+    "vendor-hash::@ea559a60d9092ac2a409": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "vendor-hash",
+      "output": "D:\\AIRND\\android\\app\\.cxx\\Release\\4j7061e5\\arm64-v8a\\llama\\vendor\\hash\\libvendor-hash.a"
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "C:\\Users\\Soe\\AppData\\Local\\Android\\Sdk\\ndk\\29.0.14206865\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "C:\\Users\\Soe\\AppData\\Local\\Android\\Sdk\\ndk\\29.0.14206865\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": [
+    "cpp",
+    "cxx",
+    "c"
+  ]
+}

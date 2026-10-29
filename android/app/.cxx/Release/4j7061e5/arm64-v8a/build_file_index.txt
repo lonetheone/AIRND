@@ -1,0 +1,12 @@
+D:\AIRND\android\app\src\main\cpp\CMakeLists.txt
+D:\AIRND\third_party\llama.cpp\CMakeLists.txt
+D:\AIRND\third_party\llama.cpp\ggml\CMakeLists.txt
+D:\AIRND\third_party\llama.cpp\ggml\src\CMakeLists.txt
+D:\AIRND\third_party\llama.cpp\ggml\src\ggml-cpu\CMakeLists.txt
+D:\AIRND\third_party\llama.cpp\src\CMakeLists.txt
+D:\AIRND\third_party\llama.cpp\vendor\CMakeLists.txt
+D:\AIRND\third_party\llama.cpp\vendor\hash\CMakeLists.txt
+D:\AIRND\third_party\llama.cpp\vendor\miniaudio\CMakeLists.txt
+D:\AIRND\third_party\llama.cpp\vendor\nlohmann\CMakeLists.txt
+D:\AIRND\third_party\llama.cpp\vendor\sheredom\CMakeLists.txt
+D:\AIRND\third_party\llama.cpp\vendor\stb\CMakeLists.txt

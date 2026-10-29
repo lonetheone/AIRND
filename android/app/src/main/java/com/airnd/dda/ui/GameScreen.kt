@@ -45,6 +45,8 @@ import com.airnd.dda.dda.Skill
 import com.airnd.dda.game.Cell
 import com.airnd.dda.game.GameController
 import com.airnd.dda.game.Phase
+import com.airnd.dda.llm.LlmStatus
+import com.airnd.dda.llm.Memory
 import kotlin.math.abs
 
 private val TILE_COLORS = listOf(
@@ -174,10 +176,24 @@ private fun LevelEndDialog(game: GameController) {
         onDismissRequest = {},
         title = { Text(if (result.won) "Level complete" else if (result.quit) "Restarted" else "Out of moves") },
         text = {
-            Text(
-                if (decision == null) "Deciding next difficulty..."
-                else "Next level: ${decision.decision}\n(${decision.source}: ${decision.reason}, ${decision.latencyMs} ms)",
-            )
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                val line = game.mascotLine
+                Text(
+                    if (decision == null) "Pip is watching..." else "Pip: " + (line?.text ?: "…"),
+                    fontSize = 18.sp,
+                )
+                if (line != null) {
+                    Text(
+                        if (line.fromModel) "on-device model · %.0f ms · %d tokens".format(line.stats?.totalMs ?: 0.0, line.stats?.genTokens ?: 0)
+                        else "canned line (${line.note})",
+                        fontSize = 11.sp, color = Color(0xFF9A9990),
+                    )
+                }
+                if (decision != null) {
+                    Text("Next level: ${decision.decision} (${decision.source}: ${decision.reason}, ${decision.latencyMs} ms)",
+                        fontSize = 12.sp, color = Color(0xFF9A9990))
+                }
+            }
         },
         confirmButton = {
             Button(onClick = game::continueAfterLevel, enabled = decision != null) {
@@ -187,6 +203,12 @@ private fun LevelEndDialog(game: GameController) {
     )
 }
 
+/** Model state plus current/peak process memory (read from /proc on each redraw). */
+private fun llmStatus(): String {
+    val m = Memory.read()
+    return "${LlmStatus.state}\nprocess RAM ${m.rssMiB} MiB (peak ${m.peakMiB} MiB)"
+}
+
 @Composable
 private fun DebugPanel(game: GameController, logPath: String, modifier: Modifier) {
     val mono = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace, color = Color(0xFFCFD8DC))
@@ -194,7 +216,16 @@ private fun DebugPanel(game: GameController, logPath: String, modifier: Modifier
         modifier.fillMaxWidth().background(Color(0xFF0E1013)).padding(8.dp).verticalScroll(rememberScrollState()),
     ) {
         val k = game.knobs
-        Text("provider: ${game.provider.name}   (AI provider arrives in M2/M3)", style = mono)
+        Text("provider: ${game.provider.name} (difficulty stays on rules)", style = mono)
+        Text(llmStatus(), style = mono)
+        game.mascotLine?.let { l ->
+            Text(
+                if (l.fromModel && l.stats != null) "pip: model, prompt %d tok %.0f ms, gen %d tok %.0f ms (%.1f tok/s)"
+                    .format(l.stats.promptTokens, l.stats.promptMs, l.stats.genTokens, l.stats.genMs, l.stats.tokensPerSecond)
+                else "pip: canned (${l.note})",
+                style = mono,
+            )
+        }
         Text("difficulty: %.2f  step ±%.1f".format(game.difficulty, Difficulty.STEP), style = mono)
         Text("knobs: ${k.colors} colors, ${k.moves} moves, goal ${k.goal}", style = mono)
         game.lastDecision?.let {

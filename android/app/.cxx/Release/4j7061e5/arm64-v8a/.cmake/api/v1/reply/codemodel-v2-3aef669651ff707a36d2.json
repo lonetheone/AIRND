@@ -1,0 +1,304 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "llama",
+					"childIndexes" : 
+					[
+						2,
+						5,
+						6
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-llama-Release-da08651b6f7bebb2022a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "D:/AIRND/third_party/llama.cpp"
+				},
+				{
+					"build" : "llama/ggml",
+					"childIndexes" : 
+					[
+						3
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-llama.ggml-Release-9e2b32fc851b002eaf15.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "D:/AIRND/third_party/llama.cpp/ggml"
+				},
+				{
+					"build" : "llama/ggml/src",
+					"childIndexes" : 
+					[
+						4
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-llama.ggml.src-Release-bb38e12bed668addb123.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "D:/AIRND/third_party/llama.cpp/ggml/src",
+					"targetIndexes" : 
+					[
+						1,
+						2,
+						3
+					]
+				},
+				{
+					"build" : "llama/ggml/src/ggml-cpu",
+					"jsonFile" : "directory-llama.ggml.src.ggml-cpu-Release-e781cb46c1bccc457ffc.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 2,
+					"source" : "D:/AIRND/third_party/llama.cpp/ggml/src/ggml-cpu"
+				},
+				{
+					"build" : "llama/src",
+					"jsonFile" : "directory-llama.src-Release-89e6eef10e51dd62c2cc.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "D:/AIRND/third_party/llama.cpp/src",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "llama/vendor",
+					"childIndexes" : 
+					[
+						7,
+						8,
+						9,
+						10,
+						11
+					],
+					"jsonFile" : "directory-llama.vendor-Release-bdd1dd3fd0e55de8682d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "D:/AIRND/third_party/llama.cpp/vendor"
+				},
+				{
+					"build" : "llama/vendor/hash",
+					"jsonFile" : "directory-llama.vendor.hash-Release-b58423fd52483b5bd3b4.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 6,
+					"projectIndex" : 1,
+					"source" : "D:/AIRND/third_party/llama.cpp/vendor/hash",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"build" : "llama/vendor/miniaudio",
+					"jsonFile" : "directory-llama.vendor.miniaudio-Release-89c0cd3c26dfdd975c31.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 6,
+					"projectIndex" : 1,
+					"source" : "D:/AIRND/third_party/llama.cpp/vendor/miniaudio"
+				},
+				{
+					"build" : "llama/vendor/nlohmann",
+					"jsonFile" : "directory-llama.vendor.nlohmann-Release-07428d12690c4c01704f.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 6,
+					"projectIndex" : 1,
+					"source" : "D:/AIRND/third_party/llama.cpp/vendor/nlohmann"
+				},
+				{
+					"build" : "llama/vendor/sheredom",
+					"jsonFile" : "directory-llama.vendor.sheredom-Release-3d5110ec08cba25d8aed.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 6,
+					"projectIndex" : 1,
+					"source" : "D:/AIRND/third_party/llama.cpp/vendor/sheredom"
+				},
+				{
+					"build" : "llama/vendor/stb",
+					"jsonFile" : "directory-llama.vendor.stb-Release-49fd095b9e3c55a81c0e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.14"
+					},
+					"parentIndex" : 6,
+					"projectIndex" : 1,
+					"source" : "D:/AIRND/third_party/llama.cpp/vendor/stb"
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "airnd_llm",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						1,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11
+					],
+					"name" : "llama.cpp",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4,
+						5
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2,
+						3,
+						4
+					],
+					"name" : "ggml",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "airnd_llm::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-airnd_llm-Release-1144ddc6b03f8f2503a5.json",
+					"name" : "airnd_llm",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "ggml::@96d03cab6fb05857ea28",
+					"jsonFile" : "target-ggml-Release-075467c6f4c559d70fa5.json",
+					"name" : "ggml",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "ggml-base::@96d03cab6fb05857ea28",
+					"jsonFile" : "target-ggml-base-Release-e96d4f9e640285949f41.json",
+					"name" : "ggml-base",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "ggml-cpu::@96d03cab6fb05857ea28",
+					"jsonFile" : "target-ggml-cpu-Release-6d708eac1c76bb631d7b.json",
+					"name" : "ggml-cpu",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "llama::@e48e26b3b0ed6be1ceb6",
+					"jsonFile" : "target-llama-Release-47f88e8e528e1e11f79e.json",
+					"name" : "llama",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "vendor-hash::@ea559a60d9092ac2a409",
+					"jsonFile" : "target-vendor-hash-Release-f13f3eac9308a9f9deef.json",
+					"name" : "vendor-hash",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/AIRND/android/app/.cxx/Release/4j7061e5/arm64-v8a",
+		"source" : "D:/AIRND/android/app/src/main/cpp"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

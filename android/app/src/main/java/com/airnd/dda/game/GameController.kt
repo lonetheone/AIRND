@@ -9,6 +9,9 @@ import com.airnd.dda.dda.DecisionResult
 import com.airnd.dda.dda.Difficulty
 import com.airnd.dda.dda.DifficultyProvider
 import com.airnd.dda.dda.PlayerSimulator
+import com.airnd.dda.dda.Skill
+import com.airnd.dda.mascot.Mascot
+import com.airnd.dda.mascot.MascotLine
 import com.airnd.dda.metrics.LevelResult
 import com.airnd.dda.metrics.MetricsLog
 import kotlinx.coroutines.CoroutineScope
@@ -29,7 +32,10 @@ class GameController(
     private val scope: CoroutineScope,
     private val log: MetricsLog,
     var provider: DifficultyProvider,
+    private val mascot: Mascot? = null,
 ) {
+    /** Pip's line for the level that just ended; null while thinking. */
+    var mascotLine by mutableStateOf<MascotLine?>(null); private set
     var level by mutableIntStateOf(1); private set
     var attempt by mutableIntStateOf(1); private set
     var difficulty by mutableStateOf(Difficulty.START); private set
@@ -111,12 +117,18 @@ class GameController(
         lastResult = result
         phase = Phase.DECIDING
         val recent = history.takeLast(HISTORY_WINDOW)
+        mascotLine = null
         scope.launch {
             val decision = withContext(Dispatchers.Default) { provider.decide(recent) }
             nextDifficulty = Difficulty.apply(difficulty, decision.decision)
             withContext(Dispatchers.IO) { log.append(result, decision, nextDifficulty) }
             lastDecision = decision
             phase = Phase.ENDED
+            // The comment arrives after the decision; the dialog is usable without it.
+            mascot?.let {
+                val zone = Skill.check(history.toList(), nextDifficulty).zone
+                mascotLine = it.comment(result, decision.decision, zone, seed = history.size)
+            }
         }
     }
 

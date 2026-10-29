@@ -47,7 +47,9 @@ NEMO notes to follow: `android/native-cpp-render-thread-and-jni-boundaries.md` (
 ## Milestones
 
 1. **M1, game + rules DDA, no AI** (done 2026-10-29: `android/`, 9 unit tests pass, installed and run on the Galaxy A16; restart → rules EASIER → logged to `files/metrics.jsonl`): playable match-3, metrics recorded, rules DDA changes the knobs, debug overlay. Install on the Galaxy A16.
-2. **M2, llama.cpp on the phone:** NDK arm64 build, JNI bridge, load the existing `smollm2-135m-decide-v1` q4_k_m from assets, benchmark screen: load time, latency per decision, peak RAM on the Galaxy A16 and the Honor.
+   - Added after M1: Elo-style skill estimate, flow channel chart (Graph view), live flow badge and meter, player simulator.
+   - **Decision 2026-10-29:** difficulty stays on rules + skill estimate (numeric job, LLM is overkill). The on-device LLM gets a language job instead: a **mascot** that comments after each level.
+2. **M2, llama.cpp on the phone + mascot** (done 2026-10-29, `docs/results/2026-10-29-m2-llm-on-phone-mascot.md`: loads in 483 ms, +218 MiB, 21-28 tok/s on the Galaxy A16; base-model comments need fine-tuning): mascot comment after each level from the level metrics (one short sentence, validated, canned-line fallback), plus NDK arm64 build, JNI bridge, load the existing `smollm2-135m-decide-v1` q4_k_m from assets, benchmark screen: load time, latency per decision, peak RAM on the Galaxy A16 and the Honor.
 3. **M3, DDA model:** generate DDA training data (synthetic player profiles: struggling, average, expert, frustrated-quitter, bored), fine-tune SmolLM2-135M, benchmark on desktop, ship in the APK behind the toggle with fallback.
 4. **M4, playtest:** play both modes, export the metrics log, compare how often each mode keeps win rate in a target band and how often players quit.
 
