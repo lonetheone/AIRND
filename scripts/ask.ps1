@@ -27,7 +27,8 @@ if (-not (Test-Path $gguf)) { throw "missing $gguf; run scripts\get-model.ps1 fi
 $Actions = @($Actions -split "," | ForEach-Object { $_.Trim().ToUpper() } | Where-Object { $_ })
 if ($Actions.Count -lt 2) { throw "give at least two actions" }
 $list = ($Actions[0..($Actions.Count - 2)] -join ", ") + ", or " + $Actions[-1]
-$system = "You control a game character. Reply with exactly one word: $list."
+# Same wording as benchmarks/decision_prompt.py, which the fine-tuned models were trained on.
+$system = "You control a character in a survival game. Choose the best action for the situation. Reply with exactly one word: $list."
 $prompt = "<|im_start|>system`n$system<|im_end|>`n<|im_start|>user`n$Situation Which action?<|im_end|>`n<|im_start|>assistant`n"
 
 $llamaArgs = @("-m", $gguf, "-p", $prompt, "-t", "4", "--temp", "0", "-no-cnv", "--no-display-prompt")
