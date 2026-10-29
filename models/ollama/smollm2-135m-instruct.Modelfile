@@ -9,7 +9,10 @@ TEMPLATE """{{- if .System }}<|im_start|>system
 {{ end }}<|im_start|>assistant
 """
 
-SYSTEM "You control a game character. Reply with exactly one word naming the action."
+# The model's own default system prompt. A game-only prompt here ("reply with
+# one word") made the 135M model echo every chat message back; game
+# instructions belong in each request instead.
+SYSTEM "You are a helpful AI assistant named SmolLM, trained by Hugging Face"
 
 PARAMETER temperature 0
 PARAMETER stop "<|im_end|>"
