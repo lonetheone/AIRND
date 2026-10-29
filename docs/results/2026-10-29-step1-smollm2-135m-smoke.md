@@ -22,7 +22,19 @@
 | q8_0 | 2 | 1069 ± 21 | 209 ± 23 |
 | q8_0 | 4 | 1715 ± 56 | 238 ± 16 |
 
-Single run of `llama-completion` (q4_k_m, 4 threads): model load 95 ms, 65-token prompt 49 ms, 4 generated tokens 17 ms. One short decision costs about 60-70 ms of CPU on this desktop. Peak RAM was not measured yet.
+Single run of `llama-completion` (q4_k_m, 4 threads): model load 95 ms, 65-token prompt 49 ms, 4 generated tokens 17 ms. One short decision costs about 60-70 ms of CPU on this desktop.
+
+## Memory (peak working set of `llama-completion`, 4 threads)
+
+| Quant | File | Peak RAM, ctx 8192 (default) | Peak RAM, ctx 512 |
+|---|---:|---:|---:|
+| f16 | 258 MB | 473 MiB | 304 MiB |
+| q8_0 | 138 MB | 353 MiB | 183 MiB |
+| q4_k_m | 101 MB | 324 MiB | 155 MiB |
+
+The difference between the two contexts is the KV cache: 30 layers x 192 K/V width x 2 (K and V) x 2 bytes (f16) = 22.5 KiB per token, so 180 MiB at 8192 and 11 MiB at 512. The computed 169 MiB difference matches the measured q4_k_m gap (324 - 155) exactly. A game decision needs well under 512 tokens, so ctx 512 is the realistic figure: about 155 MiB for q4_k_m, of which about 99 MiB is weights.
+
+The q4_k_m file averages 6.17 bits per weight, not about 4.5: the 576-wide rows are not a multiple of the 256-element K-quant block, so llama-quantize keeps some tensors (e.g. `token_embd`) at q8_0.
 
 ## Decision quality
 
