@@ -21,6 +21,14 @@ powershell -ExecutionPolicy Bypass -File scripts\build-llama.ps1   # pinned llam
 powershell -ExecutionPolicy Bypass -File scripts\get-model.ps1     # download, convert, quantize, hash
 ```
 
+Try a decision by hand:
+
+```powershell
+.\scripts\ask.ps1 "The character is starving and food is nearby."
+.\scripts\ask.ps1 "A wolf is attacking." -Actions EAT,REST,FLEE -Quant f16
+.\scripts\ask.ps1 "Full and bored." -Free    # no grammar: raw model text
+```
+
 Results: `docs/results/`.
 
 ## Stages
