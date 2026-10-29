@@ -1,0 +1,16 @@
+# Ollama import of the locally converted GGUF (see models/manifest.json).
+#   ollama create airnd-smollm2-135m -f models\ollama\smollm2-135m-instruct.Modelfile
+FROM ../gguf/smollm2-135m-instruct-q4_k_m.gguf
+
+TEMPLATE """{{- if .System }}<|im_start|>system
+{{ .System }}<|im_end|>
+{{ end }}{{- range .Messages }}<|im_start|>{{ .Role }}
+{{ .Content }}<|im_end|>
+{{ end }}<|im_start|>assistant
+"""
+
+SYSTEM "You control a game character. Reply with exactly one word naming the action."
+
+PARAMETER temperature 0
+PARAMETER stop "<|im_end|>"
+PARAMETER stop "<|im_start|>"
