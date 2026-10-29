@@ -46,7 +46,7 @@ NEMO notes to follow: `android/native-cpp-render-thread-and-jni-boundaries.md` (
 
 ## Milestones
 
-1. **M1, game + rules DDA, no AI:** playable match-3, metrics recorded, rules DDA changes the knobs, debug overlay. Install on the Galaxy A16.
+1. **M1, game + rules DDA, no AI** (done 2026-10-29: `android/`, 9 unit tests pass, installed and run on the Galaxy A16; restart → rules EASIER → logged to `files/metrics.jsonl`): playable match-3, metrics recorded, rules DDA changes the knobs, debug overlay. Install on the Galaxy A16.
 2. **M2, llama.cpp on the phone:** NDK arm64 build, JNI bridge, load the existing `smollm2-135m-decide-v1` q4_k_m from assets, benchmark screen: load time, latency per decision, peak RAM on the Galaxy A16 and the Honor.
 3. **M3, DDA model:** generate DDA training data (synthetic player profiles: struggling, average, expert, frustrated-quitter, bored), fine-tune SmolLM2-135M, benchmark on desktop, ship in the APK behind the toggle with fallback.
 4. **M4, playtest:** play both modes, export the metrics log, compare how often each mode keeps win rate in a target band and how often players quit.
