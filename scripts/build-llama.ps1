@@ -9,7 +9,7 @@
 
 param(
     [string]$BuildDir = "build\llama",
-    [string[]]$Targets = @("llama-cli", "llama-completion", "llama-bench", "llama-quantize")
+    [string[]]$Targets = @("llama-cli", "llama-completion", "llama-bench", "llama-quantize", "llama-server")
 )
 
 $ErrorActionPreference = "Stop"
