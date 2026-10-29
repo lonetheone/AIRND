@@ -41,6 +41,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.airnd.dda.dda.Difficulty
+import com.airnd.dda.dda.Skill
 import com.airnd.dda.game.Cell
 import com.airnd.dda.game.GameController
 import com.airnd.dda.game.Phase
@@ -60,10 +61,14 @@ fun GameScreen(game: GameController, logPath: String) {
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Hud(game)
+        val historySize = game.history.size
+        val flow = remember(historySize, game.difficulty) { Skill.check(game.history.toList(), game.difficulty) }
+        FlowBadge(flow, hasHistory = historySize > 0)
         if (showGraph) {
             // Graph mode takes the board's place and the debug panel's space.
             Column(Modifier.fillMaxWidth().weight(1f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 FlowChart(game.history.toList(), Modifier.fillMaxWidth(), chartHeight = 260.dp)
+                if (historySize > 0) FlowMeter(flow, Modifier.fillMaxWidth())
                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     for ((label, skill) in listOf("Sim weak" to 0.2f, "Sim average" to 0.5f, "Sim expert" to 0.85f)) {
                         OutlinedButton(onClick = { game.simulate(skill, 12) }, enabled = game.phase == Phase.PLAYING) {

@@ -1,6 +1,7 @@
 package com.airnd.dda
 
 import com.airnd.dda.dda.Difficulty
+import com.airnd.dda.dda.FlowZone
 import com.airnd.dda.dda.PlayerSimulator
 import com.airnd.dda.dda.RulesProvider
 import com.airnd.dda.dda.Skill
@@ -61,6 +62,19 @@ class SkillTest {
             val est = Skill.estimates(history).takeLast(10).average().toFloat()
             assertTrue("true $trueSkill estimated $est", abs(est - trueSkill) <= 0.15f)
         }
+    }
+
+    @Test
+    fun flowZonesAndStreak() {
+        assertEquals(FlowZone.IN_FLOW, Skill.zone(0.50f, 0.45f))
+        assertEquals(FlowZone.TOO_HARD, Skill.zone(0.70f, 0.45f))
+        assertEquals(FlowZone.TOO_EASY, Skill.zone(0.20f, 0.45f))
+        // Just making it at a steady difficulty keeps the player in flow every time.
+        val steady = List(6) { result(0.3f, won = true, left = 0f) }
+        val check = Skill.check(steady, 0.3f)
+        assertEquals(FlowZone.IN_FLOW, check.zone)
+        assertEquals(6, check.streak)
+        assertEquals(FlowZone.TOO_HARD, Skill.check(steady, 0.6f).zone)
     }
 
     /** The rules baseline should steer a simulated player into the flow channel. */

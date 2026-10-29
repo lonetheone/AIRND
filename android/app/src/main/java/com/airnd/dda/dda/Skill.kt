@@ -38,7 +38,27 @@ object Skill {
     }
 
     fun inFlow(difficulty: Float, skill: Float) = abs(difficulty - skill) <= FLOW_HALF_WIDTH
+
+    fun zone(difficulty: Float, skill: Float): FlowZone = when {
+        difficulty - skill > FLOW_HALF_WIDTH -> FlowZone.TOO_HARD
+        skill - difficulty > FLOW_HALF_WIDTH -> FlowZone.TOO_EASY
+        else -> FlowZone.IN_FLOW
+    }
+
+    /** Where the player stands now: the next level's difficulty against the latest estimate. */
+    fun check(history: List<LevelResult>, nextDifficulty: Float): FlowCheck {
+        val estimates = estimates(history)
+        val skill = estimates.lastOrNull() ?: Difficulty.START
+        val streak = history.indices.reversed()
+            .takeWhile { inFlow(history[it].difficulty, estimates[it]) }.count()
+        return FlowCheck(zone(nextDifficulty, skill), nextDifficulty - skill, skill, streak)
+    }
 }
+
+enum class FlowZone { TOO_EASY, IN_FLOW, TOO_HARD }
+
+/** [gap] = difficulty - skill; [streak] = attempts in a row that were in flow. */
+data class FlowCheck(val zone: FlowZone, val gap: Float, val skill: Float, val streak: Int)
 
 /**
  * A synthetic player of fixed true skill, for watching a difficulty provider
