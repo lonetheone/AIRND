@@ -13,6 +13,16 @@ models/        model manifest only; GGUF files are not committed
 docs/          design notes and results
 ```
 
+## Quick start (Windows)
+
+```powershell
+git clone --recurse-submodules git@github-lonetheone:lonetheone/AIRND.git
+powershell -ExecutionPolicy Bypass -File scripts\build-llama.ps1   # pinned llama.cpp, CPU, MSVC + Ninja
+powershell -ExecutionPolicy Bypass -File scripts\get-model.ps1     # download, convert, quantize, hash
+```
+
+Results: `docs/results/`.
+
 ## Stages
 
 1. Research: llama.cpp and tiny models (Windows CPU first)

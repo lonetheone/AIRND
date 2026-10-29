@@ -1,0 +1,36 @@
+﻿{
+    "models":  [
+                   {
+                       "name":  "smollm2-135m-instruct",
+                       "source":  {
+                                      "repo":  "HuggingFaceTB/SmolLM2-135M-Instruct",
+                                      "revision":  "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+                                      "license":  "apache-2.0",
+                                      "url":  "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct"
+                                  },
+                       "conversion":  "converted locally with third_party/llama.cpp convert_hf_to_gguf.py, then llama-quantize; no third-party GGUF used",
+                       "quantizations":  [
+                                             "f16",
+                                             "q8_0",
+                                             "q4_k_m"
+                                         ],
+                       "files":  {
+                                     "f16":  {
+                                                 "path":  "models/gguf/smollm2-135m-instruct-f16.gguf",
+                                                 "bytes":  270886400,
+                                                 "sha256":  "8a74026b949a60575f3f23c5fd4a94915814d40c057134e3c4c2588e966655cb"
+                                             },
+                                     "q8_0":  {
+                                                  "path":  "models/gguf/smollm2-135m-instruct-q8_0.gguf",
+                                                  "bytes":  144811520,
+                                                  "sha256":  "099b9a731e9eab4bf72402dca4fc70fee21d22d5b41f7b17dc6464bf5d21228d"
+                                              },
+                                     "q4_k_m":  {
+                                                    "path":  "models/gguf/smollm2-135m-instruct-q4_k_m.gguf",
+                                                    "bytes":  105454592,
+                                                    "sha256":  "92110992ef0b475dfa14a14f7d49dd569c5103e5b6320e69e14c08bcd380ff47"
+                                                }
+                                 }
+                   }
+               ]
+}

@@ -14,10 +14,16 @@ cmake-build-*/
 .vscode/
 .idea/
 
-# Model weights (tracked via models/manifest, not Git)
+# Model weights (tracked via models/manifest.json, not Git)
+models/hf/
+models/gguf/
 models/**/*.gguf
 models/**/*.bin
 models/**/*.safetensors
+
+# Python
+.venv/
+__pycache__/
 
 # Benchmark raw output
 benchmarks/results/raw/
